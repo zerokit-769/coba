@@ -1,12 +1,11 @@
-// cf workers
-
-addEventListener('fetch', event => {
-    event.respondWith(handleRequest(event.request))
-})
-
-async function handleRequest(request) {
+export default {
+  async fetch(request, env) {
     let url = new URL(request.url);
-    url.hostname = 'thptucirrhes.ap-southeast-1.clawcloudrun.com'; 
-    let upstream = new Request(url, request);
-    return fetch(upstream);
-}
+    if (url.pathname.startsWith('/')) {
+      url.hostname = 'thptucirrhes.ap-southeast-1.clawcloudrun.com'
+      let new_request = new Request(url, request);
+      return fetch(new_request);
+    }
+    return env.ASSETS.fetch(request);
+  },
+};
