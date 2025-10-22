@@ -6,7 +6,7 @@ addEventListener('fetch', event => {
 
 async function handleRequest(request) {
     let url = new URL(request.url);
-    url.hostname = 'HOST'; 
+    url.hostname = 'thptucirrhes.ap-southeast-1.clawcloudrun.com'; 
     let upstream = new Request(url, request);
     return fetch(upstream);
 }
